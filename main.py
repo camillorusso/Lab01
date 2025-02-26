@@ -3,17 +3,12 @@ import random
 with open("domande.txt", "r", encoding="utf-8") as file:
     righe = file.readlines()  # Lista con tutte le righe
 
-# Rimuove eventuali newline alla fine di ogni riga
-righe = [riga.strip() for riga in righe]
-print("ciao")
 dizionario = {}
 
 for i in range(0, len(righe), 7):  # Cambia step a seconda del file
     chiave = righe[i]
     valori = righe[i + 1:i + 6] if i + 1 < len(righe) else []  # Prendi 2 valori successivi
     dizionario[chiave] = valori
-
-print(dizionario)
 
 class Domanda:
     def __init__(self, testo, livello, rispCorretta, risposte):
@@ -75,8 +70,8 @@ def Giochiamo(nLivello):
         print("Risposta corretta!\n")
     if not corretto or (corretto and nLivello == 5):
         print("Fine dei giochi")
-        nick = input("Inserisci il tuo nickname: ")
 
+        nick = input("Inserisci il tuo nickname: ")
             # Legge il file e memorizza i dati in una lista
         with open("punti.txt", "r", encoding="utf-8") as file2:
             righe2 = file2.readlines()
@@ -86,13 +81,10 @@ def Giochiamo(nLivello):
             if len(dati) == 2:  # Assicura che ci sia un nome e un punteggio
                 nome, punteggio = dati[0], int(dati[1])
                 classifica.append((nome, punteggio))
-
         # Aggiunge il nuovo giocatore alla classifica
         classifica.append((nick, nLivello))
-
         # Ordina la classifica in base al punteggio in ordine decrescente
         classifica.sort(key=lambda x: x[1], reverse=True)
-
         # Scrive la classifica aggiornata nel file
         with open("punti.txt", "w", encoding="utf-8") as file3:
             for nome, punteggio in classifica:
